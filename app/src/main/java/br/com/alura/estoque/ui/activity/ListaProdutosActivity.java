@@ -53,11 +53,11 @@ public class ListaProdutosActivity extends AppCompatActivity {
             try {
                 Response<List<Produto>> response = call.execute();
                 List<Produto> produtosNovos = response.body();
-                return  produtosNovos;
+                dao.salva(produtosNovos);
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            return null;
+            return dao.buscaTodos();
         }, produtosNovos -> {
             if (produtosNovos != null) {
                 adapter.atualiza(produtosNovos);
