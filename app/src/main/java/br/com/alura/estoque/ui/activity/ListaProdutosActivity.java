@@ -1,11 +1,13 @@
 package br.com.alura.estoque.ui.activity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.io.IOException;
@@ -74,8 +76,36 @@ public class ListaProdutosActivity extends AppCompatActivity {
     private void configuraListaProdutos() {
         RecyclerView listaProdutos = findViewById(R.id.activity_lista_produtos_lista);
         adapter = new ListaProdutosAdapter(this, this::abreFormularioEditaProduto);
+
+
+        listaProdutos.setHasFixedSize(false);
+        listaProdutos.setLayoutManager(new GridLayoutManager(this, 2));
+//        GridTestView adapter = new GridTestView(this);
         listaProdutos.setAdapter(adapter);
-        adapter.setOnItemClickRemoveContextMenuListener(this::remove);
+
+
+//
+//
+//        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 5);
+//
+//
+///**
+// * Helper class to set span size for grid items based on orientation and device type
+// */
+//        GridLayoutManager.SpanSizeLookup onSpanSizeLookup = new GridLayoutManager.SpanSizeLookup() {
+//            @Override
+//            public int getSpanSize(int position) {
+//                Log.e("span", "position = " + position);
+//                return adapter.getItemViewType(position) == 2 ? gridLayoutManager.getSpanCount() : 1;
+//            }
+//        };
+//
+//        gridLayoutManager.setSpanSizeLookup(onSpanSizeLookup);
+//
+//        listaProdutos.setLayoutManager(gridLayoutManager);
+
+        listaProdutos.setAdapter(this.adapter);
+//        this.adapter.setOnItemClickRemoveContextMenuListener(this::remove);
     }
 
     private void remove(int posicao,

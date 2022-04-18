@@ -1,10 +1,13 @@
 package br.com.alura.estoque.ui.recyclerview.adapter;
 
 import android.content.Context;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.math.BigDecimal;
@@ -14,6 +17,7 @@ import java.util.Collections;
 import java.util.List;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 import br.com.alura.estoque.R;
 import br.com.alura.estoque.model.Produto;
@@ -57,6 +61,7 @@ public class ListaProdutosAdapter extends
     }
 
     public void atualiza(List<Produto> produtos) {
+        notifyItemRangeRemoved(0, this.produtos.size());
         this.produtos.clear();
         this.produtos.addAll(produtos);
         this.notifyItemRangeInserted(0, this.produtos.size());
@@ -81,6 +86,7 @@ public class ListaProdutosAdapter extends
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
+        private final androidx.constraintlayout.widget.ConstraintLayout card;
         private final TextView campoId;
         private final TextView campoNome;
         private final TextView campoPreco;
@@ -89,6 +95,7 @@ public class ListaProdutosAdapter extends
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
+            card = itemView.findViewById(R.id.card);
             campoId = itemView.findViewById(R.id.produto_item_id);
             campoNome = itemView.findViewById(R.id.produto_item_nome);
             campoPreco = itemView.findViewById(R.id.produto_item_preco);
